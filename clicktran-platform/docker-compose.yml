@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: clicktran-db
+    restart: always
+    environment:
+      POSTGRES_USER: clicktran
+      POSTGRES_PASSWORD: clicktran
+      POSTGRES_DB: clicktran
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:

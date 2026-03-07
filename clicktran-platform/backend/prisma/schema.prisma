@@ -1,0 +1,25 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = "postgresql://clicktran:clicktran@localhost:5432/clicktran"
+}
+
+model User {
+    id       Int     @id @default(autoincrement())
+    username String  @unique
+    bio      String?
+    avatar   String?
+    links    Link[]
+}
+
+model Link {
+    id     Int    @id @default(autoincrement())
+    title  String
+    url    String
+    clicks Int    @default(0)
+    userId Int
+    user   User   @relation(fields: [userId], references: [id])
+}
