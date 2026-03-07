@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 import authRoutes from "./routes/auth";
 import linkRoutes from "./routes/links";
 
@@ -12,6 +13,11 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/links", linkRoutes);
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+    res.json({ status: "ok" });
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
